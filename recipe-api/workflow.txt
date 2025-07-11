@@ -1,0 +1,30 @@
+// signup and login functionality 
+
+note : not using any signin with google we can check in the frontend if we need
+
+
+user = [
+
+    name ,
+    email,
+    password,
+    bio  : it contains some description about the user like we have in the instagram,
+    profile pic : string later in the frontend we can see 
+    // in front end we can keep other options as well to keep things up 
+
+]
+signup = [
+    name , 
+    email ,
+    password
+]
+//i can retrieve all the above using the user model 
+login = [
+    email , password
+]
+// for the passwords i need to hash the password we want it right 
+
+2 . routes folder we want signin and signout functionality
+
+// other than login and sign up what we are doing is we are putting the protected routes 
+//for the  we are putting the middleware 
