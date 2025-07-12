@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
     },
     email:{
         type : String, 
+        unique : true,
         required : true
     },
     password:{
@@ -20,7 +21,15 @@ const userSchema = new mongoose.Schema({
     },
     profilepic : {
           type : String
-    }
+    },
+    savedRecipes :[
+        {
+            type : mongoose.Schema.ObjectId,
+            ref : 'Recipe'
+        }
+    ]
+        
+
 }, {timestamps:true})
 
 const User = mongoose.model('User',userSchema);

@@ -1,5 +1,5 @@
 const Recipe = require("../models/Recipe")
-
+const User = require("../models/User")
 
 exports.getRecipe = async(req,res)=>{
     try{
@@ -83,5 +83,41 @@ exports.updateRecipe = async(req,res)=>{
         })
     }catch(err){
         res.status(500).json({message : "internal server error"})
+    }
+}
+exports.saveRecipe = async(req,res)=>{
+    try{
+        const userId  = req.user._id;
+        const {recipeId} = req.body;
+        if(!recipeId) return res.status(400).json({message:"recipeId is required"});
+        const recipe  = await Recipe.findById(recipeId);
+        if(!recipe) return res.status(400).json({message :"recipe not found"});
+
+        const user = await User.findById(userId);
+        if(user.savedRecipes.includes(recipeId)){
+            return res.status(200).json({message:"Recipe already saved"});
+        }
+       user.savedRecipes.push(recipeId);
+       await user.save();
+       res.status(200).json({message : "recipe saved successfully"});
+
+    }catch(err){
+        console.error(err)
+        res.statuts(500).json({message:"Internal server error"})
+    }
+}
+exports.getSavedRecipes = async(req,res)=>{
+    try{ 
+        
+        const userId = req.user._id;
+       
+       const user  = await User.findById(userId).populate("savedRecipes");
+        if (!user) {
+           return res.status(404).json({ message: "User not found" });
+       }
+       return res.status(200).json({savedRecipes  : user.savedRecipes});
+    }catch(err){
+        console.error(err);
+        res.status(500).json({message : "Internal server error"})
     }
 }

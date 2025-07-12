@@ -47,5 +47,12 @@ search for a specific recipe  using keywords
     photos  : [ ]
     // array for putting multiple photos we are keeping it as string as now
  ]
+// in the users can save the recipes 
+// this is mostly like saving the recipes to the user profile and the other things
+//there should be a button when  i click on the save button and 
+// lets do it normal way default
+// the  user will give the id and hit the save recipe route and i will collect it and save in the user profile
 
+//there should be two functionalities like saving the recipe and getall saved recipes
 
+//we want the user saved re
