@@ -1,12 +1,18 @@
 const express = require("express");
 const app = express();
 const authRoutes = require("./routes/authRoutes")
+const recipeRoutes = require("./routes/recipeRoutes")
+
+
+
+
 const connectDb = require('./config/db');
 
 app.use(express.json());
 connectDb();
 
 app.use('/api/auth', authRoutes);
+app.use('/api',recipeRoutes);
 app.get('/',(req,res)=>{
     res.send("recipie sharing API")
 })

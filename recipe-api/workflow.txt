@@ -28,3 +28,24 @@ login = [
 
 // other than login and sign up what we are doing is we are putting the protected routes 
 //for the  we are putting the middleware 
+
+//the above includes the user authentication and user management
+
+// next step is to create recipe routes
+in this the user can see all the recipes
+search for a specific recipe  using keywords
+-- user can  create a recipe
+--user can also publish a recipe 
+
+
+// recipe model
+ recipeSchema = [
+    // id will be created by default by mongodb
+    recipeName,
+    description ,
+    recipeInstruction,
+    photos  : [ ]
+    // array for putting multiple photos we are keeping it as string as now
+ ]
+
+
