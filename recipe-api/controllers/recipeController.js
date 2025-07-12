@@ -39,7 +39,7 @@ exports.createRecipe = async(req,res)=>{
          if(description.length>100) return res.status(201).json({message : "description should be less than 100 characters"})
          if(instructions.length>800) return res.status(201).json({message : "Instructions should not be more than 800 characters"});
          if(images.length>5) return res.status(201).json({message : "images cannot be more than 5 "});
-         const newRecipe  = await Recipe.create({recipeName,description,instructions,images});
+         const newRecipe  = await Recipe.create({recipeName,description,instructions,images,createdBy: req.user._id});
          return res.status(200).json({
             _id :newRecipe._id,
             recipeName : newRecipe.name,
@@ -47,6 +47,40 @@ exports.createRecipe = async(req,res)=>{
             instructions : newRecipe.instructions,
             images: newRecipe.images
          })
+    }catch(err){
+        res.status(500).json({message : "internal server error"})
+    }
+}
+exports.deleteRecipe = async(req,res)=>{
+    try{
+        const {id}  = req.params;
+        const recipeItem = await Recipe.findByIdAndDelete(id);
+        if(!recipeItem) return res.status(400).json({message : "no item found "});
+        return res.status(200).json({message : 'Recipe deleted Successfully'})
+    }catch(err){
+        res.status(500).json({message: "internal server error"})
+    }
+}
+exports.updateRecipe = async(req,res)=>{
+    try{
+       const {id} = req.params;
+       const {recipeName,description, instructions, images} = req.body;
+       const recipe = await Recipe.findById(id);
+       if(!recipe) return res.status(400).json({message : "no such recipe found , please check it "});
+       recipe .recipeName = recipe.recipeName ||  recipeName;
+       recipe.description  = recipe.description || description;
+       recipe.instructions  = recipe.instructions || instructions;
+       recipe . images =  recipe.images || images;
+
+       await recipe.save();
+        return res.status(200).json({
+            message : "recipe updated successfully",
+            _id : recipe._id,
+            recipeName : recipe.recipeName,
+            description : recipe.description,
+            instructions : recipe.instructions,
+            images  : recipe.images
+        })
     }catch(err){
         res.status(500).json({message : "internal server error"})
     }
