@@ -51,6 +51,20 @@ const recipeSchema = new mongoose.Schema(
             maxlength : 50
           }
         }
+      ],
+      commnets :[
+        {
+          user:{
+            type : mongoose.Types.ObjectId,
+            ref : "User"
+          },
+          value :{
+            type : String,
+            required : true,
+            minlength : 10,
+            maxlength : 50
+          }
+        }
       ]
     },
     {timestamps:true}

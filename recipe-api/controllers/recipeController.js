@@ -169,3 +169,26 @@ exports.giveFeedback = async(req,res)=>{
         res.status(500).json({message :"Internal server error"})
     }
 }
+exports.leaveComment = async(req,res)=>{
+    try{
+        const userId = req.user._id;
+        const{recipeId , comment} = req.body;
+        if(!recipeId || !comment) return res.status(400).json({message : "both recipeId and comment are required"});
+        const recipe  = await Recipe.findById(recipeId);
+        if(!recipe) return res.status(400).json({message :"Recipe not found"})
+        if(comment.length<10 && comment.length>50) return res.status(400).json({message:"comment should be between 10 and 50 characters"})
+        const user = await User.findById(userId);
+        const alreadyCommentIndex = recipe.commnets.findIndex(c=>c.user.toString()===userId.toString());
+        if(alreadyCommentIndex!==-1){
+            recipe.commnets[alreadyCommentIndex] = comment;
+        }else{
+            recipe.commnets.push({user:userId, value : comment});
+        }
+        await recipe.save(); 
+        return res.status(200).json({message : "comment added successfully"});
+
+    }catch(err){
+        console.error(err)
+        return res.status(500).json({message:"internal server error"})
+    }
+}
