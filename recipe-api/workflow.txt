@@ -55,4 +55,8 @@ search for a specific recipe  using keywords
 
 //there should be two functionalities like saving the recipe and getall saved recipes
 
-//we want the user saved re
+
+community interaction
+
+// users can follow the other users 
+//work on the rating and then on the feedback

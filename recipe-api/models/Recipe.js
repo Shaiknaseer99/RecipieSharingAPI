@@ -21,7 +21,37 @@ const recipeSchema = new mongoose.Schema(
         type : [String],
         required : true,
         maxlength : 5,
-      }
+      },
+      ratings :[{
+        user : {
+          type : mongoose.Types.ObjectId,
+          ref  :'User'
+        },
+        value:{
+          type: Number,
+          required : true,
+          min : 1,
+          max : 5
+        }
+      },
+
+      ]
+      ,
+      feedbacks:[
+        {
+         user: {
+            type :mongoose.Types.ObjectId,
+            ref : 'User'
+
+          },
+          value :{
+            type :String,
+            required : true,
+            minlength : 20,
+            maxlength : 50
+          }
+        }
+      ]
     },
     {timestamps:true}
 )

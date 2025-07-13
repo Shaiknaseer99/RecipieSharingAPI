@@ -1,3 +1,4 @@
+const { response } = require("express");
 const Recipe = require("../models/Recipe")
 const User = require("../models/User")
 
@@ -119,5 +120,52 @@ exports.getSavedRecipes = async(req,res)=>{
     }catch(err){
         console.error(err);
         res.status(500).json({message : "Internal server error"})
+    }
+}
+exports.rateRecipe = async(req,res)=>{
+    try{
+        const userId = req.user._id;
+        const{recipeId,rating} = req.body;
+        if(!recipeId || !rating ) return res.status(400).json({message : "recipeId and rating is required"});
+        const recipe = await Recipe.findById(recipeId)
+        if(!recipe) return res.status(400).json({message : "Recipe did not found , please check it"})        
+        if(rating<1 || rating >5) return res.status(400).json({message : "Rating should be greater than 0 and less than 6"});
+       
+        const alreadyRatedIndex = recipe.ratings.findIndex(r=>r.user.toString()===userId.toString());
+        if(alreadyRatedIndex!==-1){
+          
+            recipe.ratings[alreadyRatedIndex].value = rating;
+
+        }
+        else{
+            recipe.ratings.push({user:userId,value : rating});
+        }
+        await recipe.save();
+        return res.status(200).json({message : "Rating added successfully.."})
+    }catch(err){
+        res.status(500).json({message : "internal server error"})
+    }
+}
+exports.giveFeedback = async(req,res)=>{
+    try{
+      const userId = req.user._id;
+      const {recipeId, feedback} = req.body;
+      if(!recipeId || !feedback) return res.status(400).json({message:"recipeId and feedback is requried"});
+      const recipe = await Recipe.findById(recipeId);
+      if(!recipe) return res.status(400).json({message:"Recipe is not found"});
+      if(feedback.length<20 || feedback.length>50) return res.json({message : 'the feedback should be greater than 20 and lesser than 50'})
+      const alreadyGivenFeedback = recipe.feedbacks.findIndex(f =>f.user.toString()===userId.toString());
+      if(alreadyGivenFeedback!==-1){
+        recipe.feedbacks[alreadyGivenFeedback].value = feedback;
+
+      }
+      else{
+        recipe.feedbacks.push({user:userId,value : feedback});
+      }
+      await recipe.save();
+      return res.status(200).json({message : "feedback provided successfully"});
+    }catch(err){
+        console.error(err);
+        res.status(500).json({message :"Internal server error"})
     }
 }
