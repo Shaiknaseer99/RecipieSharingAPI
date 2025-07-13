@@ -1,4 +1,8 @@
 const mongoose = require("mongoose");
+
+function arraylimit(val){
+   return val.length<=5;
+}
 const recipeSchema = new mongoose.Schema(
     {
       recipeName :{
@@ -52,7 +56,7 @@ const recipeSchema = new mongoose.Schema(
           }
         }
       ],
-      commnets :[
+      comments :[
         {
           user:{
             type : mongoose.Schema.Types.ObjectId,
@@ -66,6 +70,12 @@ const recipeSchema = new mongoose.Schema(
           }
         }
       ],
+      tags: {
+        type :[String],
+        required : true,
+        valide : [arraylimit,'You cannot add more than 5 tags']
+      }
+      
     
     },
     {timestamps:true}

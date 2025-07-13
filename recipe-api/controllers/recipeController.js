@@ -212,3 +212,16 @@ exports.getSharedRecipes = async(req,res)=>{
     return res.status(200).json({sharedRecipes:user.sharedRecipes});
 
 }
+exports.filterRecipes = async(req,res)=>{
+     try{
+       const {tags} = req.query;
+        const tagsArray = tags ?tags.split(','):[];
+        const filter = tagsArray.length>0 ? {tags :{$in:tagsArray}}:{};
+        const recipes = await Recipe.find(filter);
+        return res.status(200).json({recipes});
+
+     }catch(err){
+        console.error(err);
+        return res.status(400).json({message : "internal server error"})
+     }
+}

@@ -63,3 +63,10 @@ community interaction
 
 //users can share recipes via email, direct messaging, or via social media
 // here simply we can create a route and send them a message, that iti 
+
+
+// better way is also to add the tags while creating a recipe post 
+
+as it help to filter the tags based on the tags and the other way and all 
+
+//we can simply put up a tags array  and we allow the user to add atmost 5 tags to the recipe post 
