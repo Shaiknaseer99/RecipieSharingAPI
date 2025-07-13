@@ -60,3 +60,6 @@ community interaction
 
 // users can follow the other users -- need to implement the functionality
 //work on the rating and then on the feedback
+
+//users can share recipes via email, direct messaging, or via social media
+// here simply we can create a route and send them a message, that iti 

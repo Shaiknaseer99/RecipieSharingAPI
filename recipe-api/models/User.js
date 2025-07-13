@@ -36,7 +36,11 @@ const userSchema = new mongoose.Schema({
     following:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
-    }]
+    }],
+     sharedRecipes:[{
+            type : mongoose.Schema.ObjectId,
+            ref : 'Recipe'
+      }]
         
 
 }, {timestamps:true})

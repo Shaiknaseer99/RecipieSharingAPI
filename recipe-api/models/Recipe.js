@@ -65,7 +65,8 @@ const recipeSchema = new mongoose.Schema(
             maxlength : 50
           }
         }
-      ]
+      ],
+    
     },
     {timestamps:true}
 )

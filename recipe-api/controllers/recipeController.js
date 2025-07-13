@@ -192,3 +192,23 @@ exports.leaveComment = async(req,res)=>{
         return res.status(500).json({message:"internal server error"})
     }
 }
+exports.shareRecipe = async(req,res)=>{
+   const userId = req.user._id;
+   const{recipeId } = req.body;
+   if(!recipeId) return res.status(400).json({message :"Recipe Id must be provided"});
+   const recipe = await Recipe.findById(recipeId);
+   const user = await User.findById(userId);
+   if(!recipe) return res.status(400).json({message :"Recipe did not found"});
+   if(user.sharedRecipes.includes(recipeId)) return res.status(400).json({message : "you have already shared the recipe"});
+   user.sharedRecipes.push(recipeId);
+   await user.save();
+   return res.status(200).json({message:"Recipe shared successfully"});
+
+}
+exports.getSharedRecipes = async(req,res)=>{   
+    const userId = req.user._id;
+    const user = await User.findById(userId).populate("sharedRecipes")
+
+    return res.status(200).json({sharedRecipes:user.sharedRecipes});
+
+}
