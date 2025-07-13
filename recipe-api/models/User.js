@@ -27,7 +27,16 @@ const userSchema = new mongoose.Schema({
             type : mongoose.Schema.ObjectId,
             ref : 'Recipe'
         }
-    ]
+    ],
+    followers:[{
+        type : mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    
+    }],
+    following:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    }]
         
 
 }, {timestamps:true})

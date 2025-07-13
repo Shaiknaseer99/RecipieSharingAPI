@@ -24,7 +24,7 @@ const recipeSchema = new mongoose.Schema(
       },
       ratings :[{
         user : {
-          type : mongoose.Types.ObjectId,
+          type : mongoose.Schema.Types.ObjectId,
           ref  :'User'
         },
         value:{
@@ -40,7 +40,7 @@ const recipeSchema = new mongoose.Schema(
       feedbacks:[
         {
          user: {
-            type :mongoose.Types.ObjectId,
+            type :mongoose.Schema.Types.ObjectId,
             ref : 'User'
 
           },
@@ -55,7 +55,7 @@ const recipeSchema = new mongoose.Schema(
       commnets :[
         {
           user:{
-            type : mongoose.Types.ObjectId,
+            type : mongoose.Schema.Types.ObjectId,
             ref : "User"
           },
           value :{
