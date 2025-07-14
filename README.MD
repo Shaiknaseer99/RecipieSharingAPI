@@ -150,16 +150,16 @@ recipe-api/
 
 ---
 
-🧑‍💻 Author
-Shaik Naseer
-📧 Email: naseershaik1976@gmail.com
-🌐 GitHub: https://github.com/Shaiknaseer99
-🔗 LinkedIn: https://www.linkedin.com/in/naseer-shaik-023738233/
+### 🧑‍💻 Author
+- Shaik Naseer
+- 📧 Email: naseershaik1976@gmail.com
+- 🌐 GitHub: https://github.com/Shaiknaseer99
+- 🔗 LinkedIn: https://www.linkedin.com/in/naseer-shaik-023738233/
 
 ---
 
-📄 License
-This project is licensed under the MIT License.
+### 📄 License
+- This project is licensed under the MIT License.
 
 
 
