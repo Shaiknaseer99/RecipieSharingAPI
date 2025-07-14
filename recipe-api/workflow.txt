@@ -70,3 +70,6 @@ community interaction
 as it help to filter the tags based on the tags and the other way and all 
 
 //we can simply put up a tags array  and we allow the user to add atmost 5 tags to the recipe post 
+
+//for the swagger we have to install swagger ui , express and the other things
+// to generate the swagger in auto mode we have to use swagger auto gen
