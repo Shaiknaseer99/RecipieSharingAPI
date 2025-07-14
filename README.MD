@@ -87,16 +87,16 @@ A full-featured **RESTful API** built using **Node.js**, **Express.js**, and **M
 
 ---
 
-## 📂 Folder Structure
-recipe-api/
-│
-├── controllers/ # Route logic
-├── models/ # Mongoose schemas
-├── routes/ # Route endpoints
-├── middlewares/ # Auth middleware
-├── config/ # DB connection
-├── server.js # App entry point
-└── .env # Env variables
+### 📂 Folder Structure
+- recipe-api/
+- │
+- ├── controllers/ # Route logic
+- ├── models/ # Mongoose schemas
+- ├── routes/ # Route endpoints
+- ├── middlewares/ # Auth middleware
+- ├── config/ # DB connection
+- ├── server.js # App entry point
+- └── .env # Env variables
 
 
 
